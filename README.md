@@ -4,13 +4,22 @@
 
 ## Требования
 
+* NodeJS
 * PhantomJS
 * CasperJS
 
 ## Пример использования
 
-```
+```shell
 $ ./rzd.js Москва Санкт-Петербург 01.01.2015
 RZD loaded!
 Number of variants: 17
 ```
+
+А можно так:
+
+```shell
+$ FROM='Москва'; TO='Санкт-Петербург'; DATE='20.12.2014'; RESULT=`./rzd.js $FROM $TO $DATE | egrep 'Number of variants: [^0]\d*'`; if [[ -n $RESULT ]]; then echo "Есть билеты по направлению '${FROM} – ${TO}' на ${DATE}" | mail -s "Есть билеты\!" my@mail.ru; fi
+```
+
+И результат будет отправлен вам на почту :) Добавьте последний скрипт в ```crontab``` и ожидайте появления билетов…
